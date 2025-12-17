@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulir Pendaftaran APHIX</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #020617;
+      padding: 24px;
+      border-radius: 12px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    h2 {
+      margin-top: 32px;
+      margin-bottom: 12px;
+      color: #38bdf8;
+    }
+    label {
+      display: block;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 6px;
+      border-radius: 6px;
+      border: 1px solid #334155;
+      background: #020617;
+      color: #e5e7eb;
+    }
+    .inline {
+      display: flex;
+      gap: 16px;
+      margin-top: 6px;
+    }
+    .inline label {
+      margin: 0;
+      font-size: 14px;
+    }
+    button {
+      margin-top: 24px;
+      padding: 12px;
+      width: 100%;
+      background: #22c55e;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #16a34a;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Formulir Pendaftaran APHIX</h1>
+
+    <form>
+      <!-- A. DATA PEMAIN -->
+      <h2>A. Data Pemain</h2>
+
+      <label>Nama Lengkap</label>
+      <input type="text" />
+
+      <label>Nama Panggilan</label>
+      <input type="text" />
+
+      <label>Tempat & Tanggal Lahir</label>
+      <input type="text" />
+
+      <label>Usia (Tahun)</label>
+      <input type="number" />
+
+      <label>Jenis Kelamin</label>
+      <div class="inline">
+        <label><input type="radio" name="gender" /> Laki-laki</label>
+        <label><input type="radio" name="gender" /> Perempuan</label>
+      </div>
+
+      <label>Tinggi Badan (cm)</label>
+      <input type="number" />
+
+      <label>Berat Badan (kg)</label>
+      <input type="number" />
+
+      <label>Posisi Favorit</label>
+      <input type="text" />
+
+      <label>Klub / Sekolah Asal</label>
+      <input type="text" />
+
+      <!-- B. KONTAK -->
+      <h2>B. Kontak Orang Tua / Wali</h2>
+
+      <label>Nama Orang Tua / Wali</label>
+      <input type="text" />
+
+      <label>No. HP / WhatsApp</label>
+      <input type="tel" />
+
+      <label>Email</label>
+      <input type="email" />
+
+      <label>Alamat</label>
+      <textarea rows="3"></textarea>
+
+      <!-- C. RIWAYAT -->
+      <h2>C. Riwayat Sepak Bola</h2>
+
+      <label>Pernah mengikuti SSB / klub sebelumnya?</label>
+      <div class="inline">
+        <label><input type="radio" name="ssb" /> Ya</label>
+        <label><input type="radio" name="ssb" /> Tidak</label>
+      </div>
+
+      <label>Jika ya, sebutkan nama</label>
+      <input type="text" />
+
+      <label>Prestasi / turnamen yang pernah diikuti</label>
+      <textarea rows="3"></textarea>
+
+      <!-- D. KESEHATAN -->
+      <h2>D. Kesehatan & Kondisi Fisik</h2>
+
+      <label>Ada alergi atau penyakit tertentu?</label>
+      <div class="inline">
+        <label><input type="radio" name="health" /> Ya</label>
+        <label><input type="radio" name="health" /> Tidak</label>
+      </div>
+
+      <label>Jika ya, sebutkan</label>
+      <input type="text" />
+
+      <label>Catatan medis penting lainnya</label>
+      <textarea rows="3"></textarea>
+
+      <!-- E. TAMBAHAN -->
+      <h2>E. Informasi Tambahan</h2>
+
+      <label>Tau APHIX dari mana?</label>
+      <div class="inline">
+        <label><input type="checkbox" /> Teman / Saudara</label>
+        <label><input type="checkbox" /> Sosial Media</label>
+        <label><input type="checkbox" /> Sekolah</label>
+        <label><input type="checkbox" /> Event / Turnamen</label>
+      </div>
+
+      <label>Lainnya</label>
+      <input type="text" />
+
+      <label>Tujuan ikut APHIX</label>
+      <textarea rows="3" placeholder="Contoh: belajar sepak bola, ikut turnamen, pengembangan skill, dll"></textarea>
+
+      <button type="submit">Kirim Pendaftaran</button>
+    </form>
+  </div>
+
+</body>
+</html>
