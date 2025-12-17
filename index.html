@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aphix Private</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#0B1C2D",
+              accent: "#F97316",
+            },
+            animation: {
+              float: "float 3s ease-in-out infinite",
+              "slide-up": "slideUp 0.5s ease-out",
+            },
+            keyframes: {
+              float: {
+                "0%, 100%": { transform: "translateY(0px)" },
+                "50%": { transform: "translateY(-10px)" },
+              },
+              slideUp: {
+                "0%": { opacity: "0", transform: "translateY(20px)" },
+                "100%": { opacity: "1", transform: "translateY(0)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #0b1c2d 0%, #1a3a52 100%);
+      }
+      .gradient-text {
+        background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(249, 115, 22, 0.3);
+      }
+      .glass-effect {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      /* Hide scrollbar (all browsers) */
+      #autoGallery {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE & Edge lama */
+      }
+
+      #autoGallery::-webkit-scrollbar {
+        display: none; /* Chrome, Safari */
+      }
+
+      .gallery-img {
+        min-width: 280px;
+        height: 320px;
+        object-fit: cover;
+        border-radius: 1.5rem;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      @media (min-width: 768px) {
+        .gallery-img {
+          min-width: 340px;
+          height: 450px;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-primary text-white overflow-x-hidden">
+    <!-- Navbar -->
+    <nav
+      class="fixed top-0 w-full z-50 glass-effect px-6 py-4 animate-slide-up"
+    >
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div
+            class="w-11 h-11 rounded-full bg-accent flex items-center justify-center"
+          >
+            <img
+              src="/images/aphixlogo.jpg"
+              class="w-11 h-11 object-contain"
+              alt="Aphix Logo"
+            />
+          </div>
+          <h1 class="text-2xl md:text-3xl font-bold text-white">
+            APHIX PRIVATE
+          </h1>
+        </div>
+
+        <a
+          href="#contact"
+          class="bg-accent text-primary px-6 py-2.5 rounded-full font-semibold hover:bg-orange-600 transition transform hover:scale-105 shadow-lg"
+          >Daftar Sekarang</a
+        >
+      </div>
+    </nav>
+
+    <div class="h-20"></div>
+    <section
+      class="max-w-7xl mx-auto px-6 py-12 md:py-20 grid md:grid-cols-2 gap-12 items-center"
+    >
+      <div class="animate-slide-up">
+        <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
+          Personalized football<span class="gradient-text">
+            training for winners.</span
+          >
+        </h2>
+
+        <div class="mt-10 flex flex-col sm:flex-row gap-4">
+          <a
+            href="#contact"
+            class="bg-accent text-primary px-8 py-4 rounded-full font-semibold hover:bg-orange-600 transition transform hover:scale-105 shadow-xl text-center"
+            >Daftar Sekarang</a
+          >
+        </div>
+
+        <div class="grid grid-cols-3 gap-4 mt-12"></div>
+      </div>
+
+      <div class="relative overflow-hidden">
+        <!-- Glow background -->
+        <div
+          class="absolute -top-10 -left-10 w-40 h-40 bg-accent/10 rounded-full blur-3xl"
+        ></div>
+        <div
+          class="absolute -bottom-10 -right-10 w-60 h-60 bg-orange-500/10 rounded-full blur-3xl"
+        ></div>
+
+        <!-- Auto Scroll Gallery -->
+        <div
+          id="autoGallery"
+          class="flex gap-6 select-none relative z-10 overflow-x-scroll"
+        >
+          <!-- SET 1 -->
+          <video class="gallery-img" src="/videos/video6.mp4" muted autoplay loop playsinline></video>
+          <video class="gallery-img" src="/videos/video1.mp4" muted autoplay loop playsinline></video>
+          <video class="gallery-img" src="/videos/video2.mp4" muted autoplay loop playsinline></video>
+          <video class="gallery-img" src="/videos/video3.mp4" muted autoplay loop playsinline></video>
+          <video class="gallery-img" src="/videos/video4.mp4" muted autoplay loop playsinline></video>
+          <video class="gallery-img" src="/videos/video5.mp4" muted autoplay loop playsinline></video>
+          <img src="/images/foto1.jpg" class="gallery-img" />
+          <img src="/images/foto2.jpg" class="gallery-img" />
+          <img src="/images/foto3.jpg" class="gallery-img" />
+          <img src="/images/foto4.jpg" class="gallery-img" />
+          <img src="/images/foto5.jpg" class="gallery-img" />
+          <img src="/images/foto6.jpg" class="gallery-img" />
+          <img src="/images/foto7.jpg" class="gallery-img" />
+          <img src="/images/foto8.jpg" class="gallery-img" />
+          
+        </div>
+      </div>
+    </section>
+
+    <section class="relative py-20 md:py-28 overflow-hidden">
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-[#0F2A44] to-primary"
+      ></div>
+      <div
+        class="absolute top-0 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl"
+      ></div>
+
+      <div class="relative max-w-6xl mx-auto px-6 text-center">
+        <h3 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">
+          Aphix Private
+        </h3>
+        <p
+          class="mt-6 text-gray-300 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed"
+        >
+          Program pembinaan sepak bola yang berfokus pada proses, disiplin, dan
+          progres pemain. Latihan dirancang personal, intens, dan aplikatif
+          sesuai kebutuhan di lapangan.
+        </p>
+
+        <div class="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div class="glass-effect p-6 rounded-2xl card-hover group">
+            <div class="text-4xl mb-4 group-hover:scale-110 transition">⚽</div>
+            <p class="text-accent font-bold text-lg">Berbasis Match</p>
+            <p class="text-gray-300 text-sm mt-2">
+              Latihan relevan dengan situasi pertandingan nyata.
+            </p>
+          </div>
+          <div class="glass-effect p-6 rounded-2xl card-hover group">
+            <div class="text-4xl mb-4 group-hover:scale-110 transition">📈</div>
+            <p class="text-accent font-bold text-lg">Progres Terukur</p>
+            <p class="text-gray-300 text-sm mt-2">
+              Fokus peningkatan skill & konsistensi berkelanjutan.
+            </p>
+          </div>
+          <div class="glass-effect p-6 rounded-2xl card-hover group">
+            <div class="text-4xl mb-4 group-hover:scale-110 transition">🧠</div>
+            <p class="text-accent font-bold text-lg">Mental Juara</p>
+            <p class="text-gray-300 text-sm mt-2">
+              Disiplin, fokus, dan etika bertanding profesional.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Programs -->
+    <section class="py-20 md:py-28 max-w-7xl mx-auto px-6 relative">
+      <div
+        class="absolute top-1/2 right-0 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl"
+      ></div>
+
+      <div class="text-center mb-16 relative z-10">
+        <h3 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">
+          Program Latihan
+        </h3>
+        <p class="mt-4 text-gray-300 max-w-2xl mx-auto">
+          Latihan terstruktur dan komprehensif untuk mengembangkan potensi
+          maksimal Anda
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 relative z-10">
+        <div
+          class="glass-effect p-8 rounded-3xl text-center card-hover group border-2 border-transparent hover:border-accent/50"
+        >
+          <div
+            class="w-16 h-16 bg-gradient-to-br from-accent to-orange-600 rounded-2xl mx-auto flex items-center justify-center mb-6 group-hover:rotate-12 transition"
+          >
+            <span class="text-3xl">⚡</span>
+          </div>
+          <h4 class="font-bold text-xl text-accent mb-3">Technical Training</h4>
+          <p class="text-gray-300 leading-relaxed">
+            Dribbling, passing, first touch, dan finishing dengan teknik
+            profesional.
+          </p>
+        </div>
+
+        <div
+          class="glass-effect p-8 rounded-3xl text-center card-hover group border-2 border-transparent hover:border-accent/50"
+        >
+          <div
+            class="w-16 h-16 bg-gradient-to-br from-accent to-orange-600 rounded-2xl mx-auto flex items-center justify-center mb-6 group-hover:rotate-12 transition"
+          >
+            <span class="text-3xl">💪</span>
+          </div>
+          <h4 class="font-bold text-xl text-accent mb-3">
+            Physical & Conditioning
+          </h4>
+          <p class="text-gray-300 leading-relaxed">
+            Speed, agility, strength, dan stamina fungsional untuk performa
+            maksimal.
+          </p>
+        </div>
+
+        <div
+          class="glass-effect p-8 rounded-3xl text-center card-hover group border-2 border-transparent hover:border-accent/50"
+        >
+          <div
+            class="w-16 h-16 bg-gradient-to-br from-accent to-orange-600 rounded-2xl mx-auto flex items-center justify-center mb-6 group-hover:rotate-12 transition"
+          >
+            <span class="text-3xl">🎯</span>
+          </div>
+          <h4 class="font-bold text-xl text-accent mb-3">
+            Mental & Discipline
+          </h4>
+          <p class="text-gray-300 leading-relaxed">
+            Fokus, percaya diri, dan sikap profesional untuk menjadi juara
+            sejati.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact / CTA -->
+    <section id="contact" class="relative py-24 md:py-32 overflow-hidden">
+      <div
+        class="absolute inset-0 bg-gradient-to-br from-accent via-orange-600 to-orange-500"
+      ></div>
+      <div class="absolute inset-0 opacity-10">
+        <div
+          class="absolute top-20 left-20 w-72 h-72 bg-white rounded-full blur-3xl"
+        ></div>
+        <div
+          class="absolute bottom-20 right-20 w-96 h-96 bg-white rounded-full blur-3xl"
+        ></div>
+      </div>
+
+      <div class="relative max-w-5xl mx-auto px-6 text-center">
+        <h3
+          class="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight"
+        >
+          Siap Tingkatkan Skill<br />Sepak Bola?
+        </h3>
+        <p class="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
+          Hubungi kami sekarang dan mulai latihan bersama Aphix Private.
+          Wujudkan mimpi menjadi pemain sepak bola profesional!
+        </p>
+        <a
+          href="https://wa.me/62895803499012?text=Assalamualaikum%20Coach,%0Asaya%20tertarik%20untuk%20bergabung%20dan%20ingin%20mendaftar%20latihan%20sepak%20bola%20di%20Aphix%20Private.
+"
+          target="_blank"
+          class="inline-flex items-center gap-3 bg-primary text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-[#0a1520] transition transform hover:scale-105 shadow-2xl"
+        >
+          <span>💬</span>
+          <span>Chat WhatsApp</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#0a1520] py-12 border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+          <div>
+            <h4 class="text-xl font-bold gradient-text mb-3">APHIX PRIVATE</h4>
+            <p class="text-gray-400 text-sm">
+              Program latihan sepak bola profesional untuk masa depan gemilang
+              Anda.
+            </p>
+          </div>
+          <div>
+            <h5 class="font-semibold text-white mb-3">Kontak</h5>
+            <p class="text-gray-400 text-sm">📱 WhatsApp: +62-8958-0349-9012</p>
+            <p class="text-gray-400 text-sm mt-2">
+              📍 Balikpapan, Kalimantan Timur
+            </p>
+          </div>
+          <div>
+            <h5 class="font-semibold text-white mb-3">Jam Operasional</h5>
+            <p class="text-gray-400 text-sm">Senin - Minggu: 08.00 - 22.00</p>
+          </div>
+        </div>
+        <div class="border-t border-white/5 pt-8 text-center">
+          <p class="text-sm text-gray-400">
+            © 2025 Aphix Private. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const gallery = document.getElementById("autoGallery");
+
+      // Ambil semua anak gallery dan duplikasi untuk looping seamless
+      const galleryItems = Array.from(gallery.children);
+      galleryItems.forEach((item) => {
+        const clone = item.cloneNode(true);
+        gallery.appendChild(clone);
+      });
+
+      let speed = 0.5; // ubah ini untuk mengatur kecepatan scroll (lebih besar = lebih cepat)
+      let scrollInterval;
+
+      // Fungsi auto scroll
+      function autoScroll() {
+        gallery.scrollLeft += speed;
+        // Reset scroll ketika sudah mencapai setengah scrollWidth
+        if (gallery.scrollLeft >= gallery.scrollWidth / 2) {
+          gallery.scrollLeft = 0;
+        }
+      }
+
+      // Start scroll
+      scrollInterval = setInterval(autoScroll, 16);
+
+      // Optional: pause scroll ketika mouse hover
+      gallery.addEventListener("mouseenter", () =>
+        clearInterval(scrollInterval)
+      );
+      gallery.addEventListener("mouseleave", () => {
+        scrollInterval = setInterval(autoScroll, 16);
+      });
+    </script>
+  </body>
+</html>
