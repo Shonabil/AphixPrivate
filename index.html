@@ -119,8 +119,8 @@
   </head>
   <body class="bg-primary text-white overflow-x-hidden">
     <audio id="bgMusic" loop>
-  <source src="audio/VivaLaVida.mp3" type="audio/mpeg">
-</audio>
+      <source src="audio/VivaLaVida.mp3" type="audio/mpeg" />
+    </audio>
 
     <!-- Navbar -->
     <nav
@@ -142,7 +142,7 @@
           </h1>
         </div>
 
-       <a
+        <a
           href="https://wa.me/62895803499012?text=Assalamualaikum%20Coach,%0Asaya%20tertarik%20untuk%20bergabung%20dan%20ingin%20mendaftar%20latihan%20sepak%20bola%20di%20Aphix%20Private.
 "
           class="bg-accent text-primary px-6 py-2.5 rounded-full font-semibold hover:bg-orange-600 transition transform hover:scale-105 shadow-lg"
@@ -492,8 +492,8 @@
               <p class="text-xs text-gray-300 mb-3">Pendaftaran</p>
 
               <ul class="text-sm text-gray-200 space-y-1">
-                <li>• Free bola latihan</li>
-                <li>• Free resistance band</li>
+                <li>• Free traininig ball / player</li>
+                <li>• Free resistance band / player</li>
               </ul>
             </div>
 
@@ -515,11 +515,11 @@
             </div>
           </div>
 
-         <div
+          <div
             class="glass-effect p-8 max-w rounded-3xl card-hover reveal animate-float hover:-translate-y-1 hover:shadow-xl hover:shadow-accent 500/20"
           >
             <div
-              class="flex flex-col sm:flex-row items-center justify-between gap-6"
+              class="flex flex-col sm:flex-row items-center justify-center gap-12"
             >
               <!-- JADWAL LATIHAN -->
               <div class="flex items-center gap-3">
@@ -535,7 +535,8 @@
 
               <div class="hidden sm:block w-px h-12 bg-white/20"></div>
 
-              <div class="flex items-center gap-3">
+              <!-- BERENANG (DIGESER KE KIRI) -->
+              <div class="flex items-center gap-3 sm:-ml-6">
                 <span class="text-4xl">🏊‍♂️</span>
                 <div>
                   <h4 class="font-bold text-lg text-cyan-300">Berenang</h4>
@@ -619,21 +620,21 @@
     </footer>
 
     <script>
- const music = document.getElementById("bgMusic");
-  let played = false;
+      const music = document.getElementById("bgMusic");
+      let played = false;
 
-  function playMusic() {
-    if (!played) {
-      music.volume = 1.0; // volume (0.0 – 1.0)
-      music.play().catch(() => {});
-      played = true;
-      window.removeEventListener("click", playMusic);
-      window.removeEventListener("scroll", playMusic);
-    }
-  }
+      function playMusic() {
+        if (!played) {
+          music.volume = 1.0; // volume (0.0 – 1.0)
+          music.play().catch(() => {});
+          played = true;
+          window.removeEventListener("click", playMusic);
+          window.removeEventListener("scroll", playMusic);
+        }
+      }
 
-  window.addEventListener("click", playMusic);
-  window.addEventListener("scroll", playMusic);
+      window.addEventListener("click", playMusic);
+      window.addEventListener("scroll", playMusic);
 
       const gallery = document.getElementById("autoGallery");
 
