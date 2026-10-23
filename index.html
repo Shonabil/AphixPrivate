@@ -246,6 +246,21 @@
         }
       }
 
+      #musicBtn .icon-on,
+      #musicBtn.is-playing .icon-off {
+        display: none;
+      }
+      #musicBtn.is-playing .icon-on {
+        display: block;
+      }
+      #musicBtn.is-playing {
+        animation: musicPulse 2s ease-in-out infinite;
+      }
+      @keyframes musicPulse {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.5); }
+        50% { box-shadow: 0 0 0 10px rgba(249, 115, 22, 0); }
+      }
+
       /* Lightbox */
       #lightbox {
         transition: opacity 0.3s ease;
@@ -278,7 +293,11 @@
     </style>
   </head>
   <body class="text-white overflow-x-hidden">
-    <audio id="bgMusic" loop>
+    <button id="musicBtn" type="button" aria-label="Musik on/off" class="fixed bottom-5 right-5 z-[60] w-12 h-12 rounded-full bg-accent text-primary shadow-lg shadow-orange-500/40 flex items-center justify-center hover:scale-105 transition">
+      <svg class="icon-on w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>
+      <svg class="icon-off w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4z"/><path d="M22 9l-6 6M16 9l6 6"/></svg>
+    </button>
+    <audio id="bgMusic" loop preload="auto">
       <source src="audio/VivaLaVida.mp3" type="audio/mpeg" />
     </audio>
 
@@ -1006,17 +1025,32 @@
       onNav();
 
       // Musik latar
+      // Browser hanya mengizinkan audio setelah klik/sentuh/ketik, bukan scroll.
       const music = document.getElementById("bgMusic");
-      let played = false;
+      const musicBtn = document.getElementById("musicBtn");
+      music.volume = 0.6;
+      let userMuted = false;
+      const startEvents = ["pointerdown", "touchstart", "keydown"];
+      const syncBtn = () => musicBtn.classList.toggle("is-playing", !music.paused);
+      music.addEventListener("play", syncBtn);
+      music.addEventListener("pause", syncBtn);
       function playMusic() {
-        if (played) return;
-        music.play().catch(() => {});
-        played = true;
-        window.removeEventListener("click", playMusic);
-        window.removeEventListener("scroll", playMusic);
+        if (userMuted) return;
+        music.play().then(() => {
+          startEvents.forEach((ev) => window.removeEventListener(ev, playMusic));
+        }).catch(() => {});
       }
-      window.addEventListener("click", playMusic);
-      window.addEventListener("scroll", playMusic);
+      startEvents.forEach((ev) => window.addEventListener(ev, playMusic));
+      musicBtn.addEventListener("pointerdown", (e) => e.stopPropagation());
+      musicBtn.addEventListener("click", () => {
+        if (music.paused) {
+          userMuted = false;
+          music.play().catch(() => {});
+        } else {
+          userMuted = true;
+          music.pause();
+        }
+      });
 
       // Galeri auto scroll
       const gallery = document.getElementById("autoGallery");
