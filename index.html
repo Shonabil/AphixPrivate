@@ -4,11 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aphix Private</title>
+    <meta
+      name="description"
+      content="Aphix Private - program latihan sepak bola personal di Balikpapan."
+    />
 
-    <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Tailwind Config -->
     <script>
       tailwind.config = {
         theme: {
@@ -17,534 +18,544 @@
               primary: "#0B1C2D",
               accent: "#F97316",
             },
-            animation: {
-              float: "float 3s ease-in-out infinite",
-              "slide-up": "slideUp 0.5s ease-out",
-            },
-            keyframes: {
-              float: {
-                "0%, 100%": { transform: "translateY(0px)" },
-                "50%": { transform: "translateY(-10px)" },
-              },
-              slideUp: {
-                "0%": { opacity: "0", transform: "translateY(20px)" },
-                "100%": { opacity: "1", transform: "translateY(0)" },
-              },
-            },
           },
         },
       };
     </script>
 
-    <!-- Google Font -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
 
     <style>
+      html {
+        scroll-behavior: smooth;
+      }
       body {
         font-family: "Poppins", sans-serif;
-        background: linear-gradient(135deg, #0b1c2d 0%, #1a3a52 100%);
+        background: #0b1c2d;
+      }
+      ::selection {
+        background: #f97316;
+        color: #0b1c2d;
       }
       .gradient-text {
-        background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+        background: linear-gradient(135deg, #f97316 0%, #fdba74 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
       }
+      .glass {
+        background: rgba(255, 255, 255, 0.04);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
       .card-hover {
-        transition: all 0.3s ease;
+        transition: transform 0.35s ease, box-shadow 0.35s ease,
+          border-color 0.35s ease;
       }
       .card-hover:hover {
-        transform: translateY(-8px) scale(1.02);
-        box-shadow: 0 20px 40px rgba(249, 115, 22, 0.3);
+        transform: translateY(-6px);
+        box-shadow: 0 24px 48px rgba(249, 115, 22, 0.18);
+        border-color: rgba(249, 115, 22, 0.45);
       }
-      .glass-effect {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+      .icon-box {
+        width: 3.25rem;
+        height: 3.25rem;
+        border-radius: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(249, 115, 22, 0.12);
+        color: #f97316;
+        border: 1px solid rgba(249, 115, 22, 0.25);
       }
-      /* Hide scrollbar (all browsers) */
+      .icon-box svg {
+        width: 1.6rem;
+        height: 1.6rem;
+      }
+
+      /* Logo: lingkaran oranye penuh, logo putih */
+      .logo-badge {
+        background: #f97316;
+        border-radius: 9999px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.25),
+          0 8px 20px rgba(249, 115, 22, 0.35);
+      }
+      .logo-badge img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
       #autoGallery {
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE & Edge lama */
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        -webkit-mask-image: linear-gradient(
+          to right,
+          transparent,
+          #000 6%,
+          #000 94%,
+          transparent
+        );
+        mask-image: linear-gradient(
+          to right,
+          transparent,
+          #000 6%,
+          #000 94%,
+          transparent
+        );
       }
-
       #autoGallery::-webkit-scrollbar {
-        display: none; /* Chrome, Safari */
+        display: none;
       }
-
       .gallery-img {
-        min-width: 280px;
-        height: 320px;
+        min-width: 260px;
+        height: 340px;
         object-fit: cover;
         border-radius: 1.5rem;
         box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
         border: 1px solid rgba(255, 255, 255, 0.1);
       }
-
       @media (min-width: 768px) {
         .gallery-img {
-          min-width: 340px;
-          height: 450px;
+          min-width: 320px;
+          height: 440px;
         }
+      }
 
-        /* FLOATING */
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-12px);
-          }
-        }
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
+      .reveal {
+        opacity: 0;
+        transform: translateY(32px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
 
-        /* SCROLL REVEAL */
-        .reveal {
-          opacity: 0;
-          transform: translateY(40px);
-          transition: all 0.8s ease;
+      /* Timeline */
+      .timeline {
+        position: relative;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 1.25rem;
+        width: 2px;
+        background: linear-gradient(
+          to bottom,
+          rgba(249, 115, 22, 0),
+          rgba(249, 115, 22, 0.6) 6%,
+          rgba(249, 115, 22, 0.6) 94%,
+          rgba(249, 115, 22, 0)
+        );
+      }
+      @media (min-width: 768px) {
+        .timeline::before {
+          left: 50%;
+          transform: translateX(-1px);
         }
-        .reveal.active {
-          opacity: 1;
-          transform: translateY(0);
+      }
+      #timeline .photo-card .thumb {
+        aspect-ratio: 16 / 9;
+      }
+      .tl-num {
+        background: #0b1c2d;
+        box-shadow: 0 0 0 6px rgba(249, 115, 22, 0.12);
+      }
+
+      /* Kartu dengan foto */
+      .photo-card {
+        cursor: pointer;
+        overflow: hidden;
+        text-align: left;
+        width: 100%;
+      }
+      .photo-card .thumb {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 4 / 3;
+      }
+      .photo-card .thumb img,
+      .photo-card .thumb video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 20%;
+        transition: transform 0.6s ease;
+      }
+      .photo-card .thumb video {
+        object-position: center 80%;
+      }
+      .photo-card:hover .thumb img,
+      .photo-card:hover .thumb video {
+        transform: scale(1.08);
+      }
+      .photo-card .thumb::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(11, 28, 45, 0.95),
+          rgba(11, 28, 45, 0.1) 60%
+        );
+      }
+      .photo-card .view-chip {
+        position: absolute;
+        right: 0.9rem;
+        bottom: 0.9rem;
+        z-index: 2;
+        transition: background 0.3s, color 0.3s;
+      }
+      .photo-card:hover .view-chip {
+        background: #f97316;
+        color: #0b1c2d;
+      }
+      .photo-card:focus-visible {
+        outline: 2px solid #f97316;
+        outline-offset: 3px;
+      }
+
+      .event-track {
+        scrollbar-width: none;
+      }
+      .event-track::-webkit-scrollbar {
+        display: none;
+      }
+      .event-slide {
+        flex: 0 0 85%;
+      }
+      @media (min-width: 640px) {
+        .event-slide {
+          flex-basis: calc((100% - 1.5rem) / 2);
         }
+      }
+      @media (min-width: 1024px) {
+        .event-slide {
+          flex-basis: calc((100% - 3rem) / 3);
+        }
+      }
+
+      /* Lightbox */
+      #lightbox {
+        transition: opacity 0.3s ease;
+      }
+      #lightbox.hidden-lb {
+        opacity: 0;
+        pointer-events: none;
+      }
+      #lbImg {
+        transition: opacity 0.25s ease;
+      }
+
+      .field {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 0.9rem;
+        padding: 0.85rem 1rem;
+        color: #fff;
+        outline: none;
+        transition: border-color 0.2s, background 0.2s;
+      }
+      .field::placeholder {
+        color: rgba(255, 255, 255, 0.45);
+      }
+      .field:focus {
+        border-color: #f97316;
+        background: rgba(255, 255, 255, 0.1);
       }
     </style>
   </head>
-  <body class="bg-primary text-white overflow-x-hidden">
+  <body class="text-white overflow-x-hidden">
     <audio id="bgMusic" loop>
       <source src="audio/VivaLaVida.mp3" type="audio/mpeg" />
     </audio>
 
     <!-- Navbar -->
-    <nav
-      class="fixed top-0 w-full z-50 glass-effect px-6 py-4 animate-slide-up"
-    >
-      <div class="max-w-7xl mx-auto flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <div
-            class="w-11 h-11 rounded-full bg-accent flex items-center justify-center"
-          >
-            <img
-              src="/images/aphixlogo.jpg"
-              class="w-11 h-11 object-contain"
-              alt="Aphix Logo"
-            />
-          </div>
-          <h1 class="text-2xl md:text-3xl font-bold text-white">
-            APHIX PRIVATE
-          </h1>
+    <nav id="navbar" class="fixed top-0 w-full z-50 px-4 sm:px-6 py-4 transition-all duration-300">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+        <a href="#" class="flex items-center gap-3">
+          <span class="logo-badge w-11 h-11 shrink-0">
+            <img src="/images/aphixlogo-white.png" alt="Aphix Logo" />
+          </span>
+          <span class="text-lg sm:text-2xl font-bold tracking-wide">APHIX PRIVATE</span>
+        </a>
+        <div class="hidden md:flex items-center gap-8 text-sm text-gray-300">
+          <a href="#program" class="hover:text-accent transition">Program</a>
+          <a href="#perjalanan" class="hover:text-accent transition">Perjalanan</a>
+          <a href="#event" class="hover:text-accent transition">Event</a>
+          <a href="#jadwal" class="hover:text-accent transition">Jadwal</a>
         </div>
-
         <a
-          href="https://wa.me/62895803499012?text=Assalamualaikum%20Coach,%0Asaya%20tertarik%20untuk%20bergabung%20dan%20ingin%20mendaftar%20latihan%20sepak%20bola%20di%20Aphix%20Private.
-"
-          class="bg-accent text-primary px-6 py-2.5 rounded-full font-semibold hover:bg-orange-600 transition transform hover:scale-105 shadow-lg"
-          >Chat WhatsApp</a
+          href="#daftar"
+          class="bg-accent text-primary px-5 py-2.5 rounded-full font-semibold text-sm hover:bg-orange-500 transition shadow-lg shadow-orange-500/30"
+          >Daftar</a
         >
       </div>
     </nav>
 
-    <div class="h-20"></div>
-    <section
-      class="max-w-7xl mx-auto px-6 py-12 md:py-20 grid md:grid-cols-2 gap-12 items-center"
-    >
-      <div class="animate-slide-up">
-        <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
-          Personalized football<span class="gradient-text">
-            training for winners.</span
-          >
-        </h2>
-
-        <div class="mt-10 flex flex-col sm:flex-row gap-4">
-          <a
-            href="#contact"
-            class="bg-accent text-primary px-8 py-4 rounded-full font-semibold hover:bg-orange-600 transition transform hover:scale-105 shadow-xl text-center"
-            >Daftar Sekarang</a
-          >
+    <!-- Hero -->
+    <section class="relative pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden">
+      <div class="absolute -top-20 -left-20 w-96 h-96 bg-accent/15 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 right-0 w-[28rem] h-[28rem] bg-orange-500/10 rounded-full blur-3xl"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-12 items-center relative">
+        <div>
+          <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-accent border border-accent/40 rounded-full px-4 py-1.5 bg-accent/5">
+            <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+            Football Academy &middot; Balikpapan
+          </span>
+          <h1 class="mt-6 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1]">
+            Personalized football
+            <span class="gradient-text">training for winners.</span>
+          </h1>
+          <p class="mt-6 text-gray-300 text-lg max-w-lg leading-relaxed">
+            Latihan personal, intens, dan terukur bersama coach berlisensi
+            untuk membawa pemain muda ke level berikutnya.
+          </p>
+          <div class="mt-10 flex flex-col sm:flex-row gap-4">
+            <a href="#daftar" class="group bg-accent text-primary px-8 py-4 rounded-full font-semibold hover:bg-orange-500 transition shadow-xl shadow-orange-500/30 text-center inline-flex items-center justify-center gap-2">
+              Daftar Sekarang
+              <svg class="w-5 h-5 transition group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a href="#perjalanan" class="border border-white/20 px-8 py-4 rounded-full font-semibold hover:border-accent hover:text-accent transition text-center">Lihat Perjalanan Kami</a>
+          </div>
+          <div class="mt-12 grid grid-cols-3 gap-4 max-w-xl">
+            <div class="border-l-2 border-accent/60 pl-4">
+              <p class="text-xl sm:text-3xl font-bold gradient-text whitespace-nowrap">2x</p>
+              <p class="text-xs text-gray-400 mt-1">Latihan / minggu</p>
+            </div>
+            <div class="border-l-2 border-accent/60 pl-4">
+              <p class="text-xl sm:text-3xl font-bold gradient-text whitespace-nowrap">Lisensi D</p>
+              <p class="text-xs text-gray-400 mt-1">Coach PSSI</p>
+            </div>
+            <div class="border-l-2 border-accent/60 pl-4">
+              <p class="text-xl sm:text-3xl font-bold gradient-text whitespace-nowrap">U-13</p>
+              <p class="text-xs text-gray-400 mt-1">Pemain di Soeratin</p>
+            </div>
+          </div>
         </div>
 
-        <div class="grid grid-cols-3 gap-4 mt-12"></div>
-      </div>
-
-      <div class="relative overflow-hidden">
-        <!-- Glow background -->
-        <div
-          class="absolute -top-10 -left-10 w-40 h-40 bg-accent/10 rounded-full blur-3xl"
-        ></div>
-        <div
-          class="absolute -bottom-10 -right-10 w-60 h-60 bg-orange-500/10 rounded-full blur-3xl"
-        ></div>
-
-        <!-- Auto Scroll Gallery -->
-        <div
-          id="autoGallery"
-          class="flex gap-6 select-none relative z-10 overflow-x-scroll"
-        >
-          <!-- SET 1 -->
-          <video
-            class="gallery-img"
-            src="/videos/video6.mp4"
-            muted
-            autoplay
-            loop
-            playsinline
-          ></video>
-          <video
-            class="gallery-img"
-            src="/videos/video1.mp4"
-            muted
-            autoplay
-            loop
-            playsinline
-          ></video>
-          <video
-            class="gallery-img"
-            src="/videos/video2.mp4"
-            muted
-            autoplay
-            loop
-            playsinline
-          ></video>
-          <video
-            class="gallery-img"
-            src="/videos/video3.mp4"
-            muted
-            autoplay
-            loop
-            playsinline
-          ></video>
-          <video
-            class="gallery-img"
-            src="/videos/video4.mp4"
-            muted
-            autoplay
-            loop
-            playsinline
-          ></video>
-          <video
-            class="gallery-img"
-            src="/videos/video5.mp4"
-            muted
-            autoplay
-            loop
-            playsinline
-          ></video>
-          <img src="/images/foto1.jpg" class="gallery-img" />
-          <img src="/images/foto2.jpg" class="gallery-img" />
-          <img src="/images/foto3.jpg" class="gallery-img" />
-          <img src="/images/foto4.jpg" class="gallery-img" />
-          <img src="/images/foto5.jpg" class="gallery-img" />
-          <img src="/images/foto6.jpg" class="gallery-img" />
-          <img src="/images/foto7.jpg" class="gallery-img" />
-          <img src="/images/foto8.jpg" class="gallery-img" />
+        <div class="relative overflow-hidden">
+          <div id="autoGallery" class="flex gap-6 select-none relative z-10 overflow-x-scroll py-4">
+            <video class="gallery-img" src="/videos/video6.mp4" muted autoplay loop playsinline></video>
+            <video class="gallery-img" src="/videos/video1.mp4" muted autoplay loop playsinline></video>
+            <video class="gallery-img" src="/videos/video2.mp4" muted autoplay loop playsinline></video>
+            <video class="gallery-img" src="/videos/video3.mp4" muted autoplay loop playsinline></video>
+            <video class="gallery-img" src="/videos/video4.mp4" muted autoplay loop playsinline></video>
+            <video class="gallery-img" src="/videos/video5.mp4" muted autoplay loop playsinline></video>
+            <video class="gallery-img" src="/videos/video7.mp4" muted autoplay loop playsinline></video>
+            <img src="/images/foto1.jpg" class="gallery-img" alt="Latihan Aphix" />
+            <img src="/images/foto2.jpg" class="gallery-img" alt="Latihan Aphix" />
+            <img src="/images/foto3.jpg" class="gallery-img" alt="Latihan Aphix" />
+            <img src="/images/foto4.jpg" class="gallery-img" alt="Latihan Aphix" />
+            <img src="/images/foto5.jpg" class="gallery-img" alt="Latihan Aphix" />
+            <img src="/images/foto6.jpg" class="gallery-img" alt="Latihan Aphix" />
+            <img src="/images/foto7.jpg" class="gallery-img" alt="Latihan Aphix" />
+            <img src="/images/foto8.jpg" class="gallery-img" alt="Latihan Aphix" />
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="relative py-20 md:py-28 overflow-hidden">
-      <div
-        class="absolute inset-0 bg-gradient-to-b from-[#0F2A44] to-primary"
-      ></div>
-      <div
-        class="absolute top-0 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl"
-      ></div>
-
-      <div class="relative max-w-6xl mx-auto px-6 text-center">
-        <h3 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">
-          Aphix Private
-        </h3>
-        <p
-          class="mt-6 text-gray-300 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed"
-        >
+    <!-- About -->
+    <section class="relative py-20 md:py-28 bg-gradient-to-b from-[#0F2A44] to-primary">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 text-center">
+        <span class="text-xs font-semibold tracking-[0.2em] uppercase text-accent">Tentang Kami</span>
+        <h2 class="mt-3 text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">Aphix Private</h2>
+        <p class="mt-6 text-gray-300 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
           Program pembinaan sepak bola yang berfokus pada proses, disiplin, dan
           progres pemain. Latihan dirancang personal, intens, dan aplikatif
           sesuai kebutuhan di lapangan.
         </p>
 
-        <div class="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div class="glass-effect p-6 rounded-2xl card-hover group">
-            <div class="text-4xl mb-4 group-hover:scale-110 transition">⚽</div>
+        <div class="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 text-left">
+          <div class="glass p-6 rounded-2xl card-hover reveal">
+            <div class="icon-box mb-5">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7l4 3-1.5 4.5h-5L8 10z"/><path d="M12 3v4M16 10l4.5-1.5M14.5 14.5l2.5 4M9.5 14.5l-2.5 4M8 10L3.5 8.5"/></svg>
+            </div>
             <p class="text-accent font-bold text-lg">Berbasis Match</p>
-            <p class="text-gray-300 text-sm mt-2">
-              Latihan relevan dengan situasi pertandingan nyata.
-            </p>
+            <p class="text-gray-300 text-sm mt-2">Latihan relevan dengan situasi pertandingan nyata.</p>
           </div>
-          <div class="glass-effect p-6 rounded-2xl card-hover group">
-            <div class="text-4xl mb-4 group-hover:scale-110 transition">📈</div>
+          <div class="glass p-6 rounded-2xl card-hover reveal">
+            <div class="icon-box mb-5">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
+            </div>
             <p class="text-accent font-bold text-lg">Progres Terukur</p>
-            <p class="text-gray-300 text-sm mt-2">
-              Fokus peningkatan skill & konsistensi berkelanjutan.
-            </p>
+            <p class="text-gray-300 text-sm mt-2">Fokus peningkatan skill &amp; konsistensi berkelanjutan.</p>
           </div>
-          <div class="glass-effect p-6 rounded-2xl card-hover group">
-            <div class="text-4xl mb-4 group-hover:scale-110 transition">🧠</div>
+          <div class="glass p-6 rounded-2xl card-hover reveal">
+            <div class="icon-box mb-5">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg>
+            </div>
             <p class="text-accent font-bold text-lg">Mental Juara</p>
-            <p class="text-gray-300 text-sm mt-2">
-              Disiplin, fokus, dan etika bertanding profesional.
-            </p>
+            <p class="text-gray-300 text-sm mt-2">Disiplin, fokus, dan etika bertanding profesional.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Programs -->
-    <section class="py-20 md:py-28 max-w-7xl mx-auto px-6 relative">
-      <div
-        class="absolute top-1/2 right-0 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl"
-      ></div>
-
-      <div class="text-center mb-16 relative z-10">
-        <h3 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">
-          Our Program
-        </h3>
+    <section id="program" class="py-20 md:py-28 max-w-7xl mx-auto px-4 sm:px-6 relative">
+      <div class="text-center mb-16">
+        <span class="text-xs font-semibold tracking-[0.2em] uppercase text-accent">Materi Latihan</span>
+        <h2 class="mt-3 text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">Our Program</h2>
         <p class="mt-4 text-gray-300 max-w-2xl mx-auto">
-          Latihan terstruktur dan komprehensif untuk mengembangkan potensi
-          maksimal Anda
+          Latihan terstruktur dan komprehensif untuk mengembangkan potensi maksimal pemain.
         </p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-8 relative z-10">
-        <div
-          class="glass-effect p-8 rounded-3xl text-center card-hover group border-2 border-transparent hover:border-accent/50"
-        >
-          <div
-            class="w-16 h-16 bg-gradient-to-br from-accent to-orange-600 rounded-2xl mx-auto flex items-center justify-center mb-6 group-hover:rotate-12 transition"
-          >
-            <span class="text-3xl">⚡</span>
-          </div>
-          <h4 class="font-bold text-xl text-accent mb-3">Technical Training</h4>
-          <p class="text-gray-300 leading-relaxed">
-            Dribbling, passing, first touch, dan finishing dengan teknik
-            profesional.
-          </p>
-        </div>
-
-        <div
-          class="glass-effect p-8 rounded-3xl text-center card-hover group border-2 border-transparent hover:border-accent/50"
-        >
-          <div
-            class="w-16 h-16 bg-gradient-to-br from-accent to-orange-600 rounded-2xl mx-auto flex items-center justify-center mb-6 group-hover:rotate-12 transition"
-          >
-            <span class="text-3xl">💪</span>
-          </div>
-          <h4 class="font-bold text-xl text-accent mb-3">
-            Physical & Conditioning
-          </h4>
-          <p class="text-gray-300 leading-relaxed">
-            Speed, agility, strength, dan stamina fungsional untuk performa
-            maksimal.
-          </p>
-        </div>
-
-        <div
-          class="glass-effect p-8 rounded-3xl text-center card-hover group border-2 border-transparent hover:border-accent/50"
-        >
-          <div
-            class="w-16 h-16 bg-gradient-to-br from-accent to-orange-600 rounded-2xl mx-auto flex items-center justify-center mb-6 group-hover:rotate-12 transition"
-          >
-            <span class="text-3xl">🎯</span>
-          </div>
-          <h4 class="font-bold text-xl text-accent mb-3">
-            Mental & Discipline
-          </h4>
-          <p class="text-gray-300 leading-relaxed">
-            Fokus, percaya diri, dan sikap profesional untuk menjadi juara
-            sejati.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="relative py-20 md:py-28 overflow-hidden">
-      <div
-        class="absolute inset-0 bg-gradient-to-b from-[#0F2A44] to-primary"
-      ></div>
-      <div
-        class="absolute top-0 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl"
-      ></div>
-
-      <div class="relative max-w-6xl mx-auto px-6 text-center">
-        <h3 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">
-          Our Event
-        </h3>
-        <p
-          class="mt-6 text-gray-300 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed"
-        >
-          Agenda rutin bulanan Aphix yang diselenggarakan sebagai wadah
-          kegiatan, pembinaan pemain, dan pengembangan performa kompetitif.
-        </p>
-
-        <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="glass-effect p-6 rounded-2xl card-hover group">
-            <div class="text-4xl mb-4 group-hover:scale-110 transition">🏊‍♂️</div>
-            <p class="text-accent font-bold text-lg">Swim Session</p>
-            <p class="text-gray-300 text-sm mt-2">
-              Program renang rutin dengan pendampingan pelatih khusus untuk
-              menunjang kebugaran dan fisik pemain.
-            </p>
-          </div>
-
-          <div class="glass-effect p-6 rounded-2xl card-hover group">
-            <div class="text-4xl mb-4 group-hover:scale-110 transition">🤵</div>
-            <p class="text-accent font-bold text-lg">Guest Coach</p>
-            <p class="text-gray-300 text-sm mt-2">
-              Sesi latihan bersama Coach tamu untuk menambah wawasan, motivasi,
-              dan kualitas latihan.
-            </p>
-          </div>
-
-          <div class="glass-effect p-6 rounded-2xl card-hover group">
-            <div class="text-4xl mb-4 group-hover:scale-110 transition">🏅</div>
-            <p class="text-accent font-bold text-lg">
-              Mini Tournament Internal
-            </p>
-            <p class="text-gray-300 text-sm mt-2">
-              Turnamen internal sebagai sarana evaluasi kemampuan dan
-              peningkatan pengalaman.
-            </p>
-          </div>
-
-          <div
-            class="glass-effect p-6 rounded-2xl card-hover group flex flex-col items-center justify-center text-center"
-          >
-            <div
-              class="mb-4 group-hover:scale-110 transition-transform duration-300"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="48"
-                height="48"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="text-accent opacity-80 group-hover:opacity-100"
-              >
-                <line x1="10" x2="14" y1="2" y2="2" />
-                <line x1="12" x2="15" y1="14" y2="11" />
-                <circle cx="12" cy="14" r="8" />
-                <path d="M20.2 6c-2.1-2.1-5-3-7.5-2.5" />
-              </svg>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="glass p-8 rounded-3xl card-hover reveal">
+          <div class="flex items-center justify-between mb-6">
+            <div class="icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>
             </div>
-            <p class="text-accent font-bold text-lg">Coming Up</p>
+            <span class="text-4xl font-extrabold text-white/10">01</span>
           </div>
+          <h3 class="font-bold text-xl mb-3">Technical Training</h3>
+          <p class="text-gray-300 leading-relaxed">Dribbling, passing, first touch, dan finishing dengan teknik profesional.</p>
+        </div>
+        <div class="glass p-8 rounded-3xl card-hover reveal">
+          <div class="flex items-center justify-between mb-6">
+            <div class="icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5v11M17.5 6.5v11M3 9.5v5M21 9.5v5M6.5 12h11"/></svg>
+            </div>
+            <span class="text-4xl font-extrabold text-white/10">02</span>
+          </div>
+          <h3 class="font-bold text-xl mb-3">Physical &amp; Conditioning</h3>
+          <p class="text-gray-300 leading-relaxed">Speed, agility, strength, dan stamina fungsional untuk performa maksimal.</p>
+        </div>
+        <div class="glass p-8 rounded-3xl card-hover reveal">
+          <div class="flex items-center justify-between mb-6">
+            <div class="icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>
+            </div>
+            <span class="text-4xl font-extrabold text-white/10">03</span>
+          </div>
+          <h3 class="font-bold text-xl mb-3">Mental &amp; Discipline</h3>
+          <p class="text-gray-300 leading-relaxed">Fokus, percaya diri, dan sikap profesional untuk menjadi juara sejati.</p>
         </div>
       </div>
     </section>
-    <section
-      class="py-20 md:py-28 max-w-7xl mx-auto px-6 relative overflow-hidden"
-    >
-      <!-- BG BLUR -->
-      <div
-        class="absolute bottom-0 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl"
-      ></div>
 
-      <div class="grid md:grid-cols-2 gap-16 items-center relative z-10">
-        <!-- KIRI -->
+    <!-- Perjalanan -->
+    <section id="perjalanan" class="relative py-20 md:py-28 bg-gradient-to-b from-[#0F2A44] to-primary overflow-hidden">
+      <div class="absolute top-10 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl"></div>
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 relative">
+        <div class="text-center mb-16">
+          <span class="text-xs font-semibold tracking-[0.2em] uppercase text-accent">Yang Sudah Kami Lewati</span>
+          <h2 class="mt-3 text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">Perjalanan Aphix</h2>
+          <p class="mt-4 text-gray-300 max-w-2xl mx-auto">
+            Langkah demi langkah yang membentuk Aphix Private hingga hari ini.
+            Klik setiap momen untuk melihat fotonya.
+          </p>
+        </div>
+
+        <div id="timeline" class="timeline space-y-6 md:space-y-0"></div>
+      </div>
+    </section>
+
+    <!-- Events -->
+    <section id="event" class="py-20 md:py-28 max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center">
+        <span class="text-xs font-semibold tracking-[0.2em] uppercase text-accent">Agenda Bulanan</span>
+        <h2 class="mt-3 text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">Our Event</h2>
+        <p class="mt-6 text-gray-300 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
+          Agenda rutin bulanan Aphix sebagai wadah kegiatan, pembinaan pemain,
+          dan pengembangan performa kompetitif. Klik untuk melihat dokumentasinya.
+        </p>
+      </div>
+
+      <div class="relative mt-12">
+        <div id="eventGrid" class="event-track flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4"></div>
+        <div class="mt-6 flex items-center justify-center gap-4">
+          <button id="evPrev" class="w-11 h-11 rounded-full glass flex items-center justify-center hover:bg-accent hover:text-primary transition" aria-label="Sebelumnya">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+          </button>
+          <div id="evDots" class="flex gap-1.5"></div>
+          <button id="evNext" class="w-11 h-11 rounded-full glass flex items-center justify-center hover:bg-accent hover:text-primary transition" aria-label="Berikutnya">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Venue & Schedule -->
+    <section id="jadwal" class="relative py-20 md:py-28 bg-gradient-to-b from-[#0F2A44] to-primary">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-16 items-center">
         <div>
-          <h3
-            class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-6"
-          >
-            Venue & Schedule
-          </h3>
+          <span class="text-xs font-semibold tracking-[0.2em] uppercase text-accent">Info Latihan</span>
+          <h2 class="mt-3 text-3xl sm:text-4xl md:text-5xl font-bold gradient-text mb-6">Venue &amp; Schedule</h2>
           <p class="text-gray-300 leading-relaxed max-w-md">
             Program Aphix dirancang untuk memberikan pengalaman latihan yang
             nyaman, terstruktur, dan terjangkau bagi setiap pemain.
           </p>
         </div>
 
-        <!-- KANAN : CARD STACK -->
         <div class="space-y-6">
-          <!-- FASILITAS -->
-          <div
-            class="glass-effect p-8 max-w rounded-3xl card-hover reveal animate-float hover:-translate-y-1 hover:shadow-xl hover:shadow-accent 500/20"
-          >
-            <span class="text-3xl mb-3 block">🏟️</span>
-            <h4 class="font-bold text-lg text-accent mb-2">Facility</h4>
-            <ul class="text-gray-300 text-sm space-y-1.5">
-              <li>• Lapangan standar</li>
-              <li>• Peralatan lengkap</li>
-              <li>• Coach berlisensi PSSI</li>
-            </ul>
+          <div class="glass p-7 rounded-3xl card-hover reveal flex gap-5">
+            <div class="icon-box shrink-0">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="1"/><path d="M12 5v14"/><circle cx="12" cy="12" r="2.5"/><path d="M2 9h3v6H2M22 9h-3v6h3"/></svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-lg text-accent mb-2">Facility</h3>
+              <ul class="text-gray-300 text-sm space-y-1.5">
+                <li>Lapangan standar</li>
+                <li>Peralatan lengkap</li>
+                <li>Coach berlisensi D PSSI</li>
+              </ul>
+            </div>
           </div>
 
-          <!-- HARGA -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div
-              class="glass-effect bg-white/10 backdrop-blur-xl p-5 rounded-2xl card-hover reveal animate-float hover:-translate-y-1 hover:shadow-xl hover:shadow-green-400/40"
-            >
-              <span class="text-4xl mb-3 block drop-shadow-lg">💰</span>
-              <h4 class="font-bold text-lg text-green-300 drop-shadow-sm mb-2">
-                Registration Fee
-              </h4>
-              <div class="text-2xl font-bold text-white drop-shadow-md">
-                Rp 250K
-              </div>
-              <p class="text-xs text-gray-300 mb-3">Pendaftaran</p>
-
+            <div class="glass p-6 rounded-2xl card-hover reveal">
+              <p class="text-xs uppercase tracking-widest text-gray-400">Registration Fee</p>
+              <p class="text-3xl font-bold mt-2">Rp 250K</p>
+              <p class="text-xs text-gray-400 mb-4">sekali bayar</p>
               <ul class="text-sm text-gray-200 space-y-1">
-                <li>• Free traininig ball / player</li>
-                <li>• Free resistance band / player</li>
+                <li>Free training ball / player</li>
+                <li>Free resistance band / player</li>
               </ul>
             </div>
-
-            <div
-              class="glass-effect bg-white/10 backdrop-blur-xl p-5 rounded-2xl card-hover reveal animate-float hover:-translate-y-1 hover:shadow-xl hover:shadow-green-400/40"
-            >
-              <span class="text-4xl mb-3 block drop-shadow-lg">💰</span>
-              <h4 class="font-bold text-lg text-green-300 drop-shadow-sm mb-2">
-                Monthly Fee
-              </h4>
-              <div class="text-2xl font-bold text-white drop-shadow-md">
-                Rp 200K
-              </div>
-
-              <p class="text-xs text-gray-300 mb-3">/ bulan</p>
+            <div class="glass p-6 rounded-2xl card-hover reveal relative" style="border-color: rgba(249,115,22,.45)">
+              <span class="absolute -top-3 right-5 bg-accent text-primary text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">All Access</span>
+              <p class="text-xs uppercase tracking-widest text-gray-400">Monthly Fee</p>
+              <p class="text-3xl font-bold mt-2 gradient-text">Rp 200K</p>
+              <p class="text-xs text-gray-400 mb-4">/ bulan</p>
               <ul class="text-sm text-gray-200 space-y-1">
-                <li>Semua sesi latihan & event Aphix</li>
+                <li>Semua sesi latihan &amp; event Aphix</li>
               </ul>
             </div>
           </div>
 
-          <div
-            class="glass-effect p-8 max-w rounded-3xl card-hover reveal animate-float hover:-translate-y-1 hover:shadow-xl hover:shadow-accent 500/20"
-          >
-            <div
-              class="flex flex-col sm:flex-row items-center justify-center gap-12"
-            >
-              <!-- JADWAL LATIHAN -->
-              <div class="flex items-center gap-3">
-                <span class="text-4xl">⚽</span>
-                <div>
-                  <h4 class="font-bold text-lg text-orange-400">Latihan</h4>
-                  <p class="text-gray-300 text-sm">
-                    Selasa & Kamis<br />
-                    17.00 – 18.00 WIB
-                  </p>
-                </div>
+          <div class="glass p-7 rounded-3xl card-hover reveal grid sm:grid-cols-2 gap-6">
+            <div class="flex items-center gap-4">
+              <div class="icon-box shrink-0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
               </div>
-
-              <div class="hidden sm:block w-px h-12 bg-white/20"></div>
-
-              <!-- BERENANG (DIGESER KE KIRI) -->
-              <div class="flex items-center gap-3 sm:-ml-6">
-                <span class="text-4xl">🏊‍♂️</span>
-                <div>
-                  <h4 class="font-bold text-lg text-cyan-300">Berenang</h4>
-                  <p class="text-gray-300 text-sm">
-                    Minggu<br />
-                    08.00 – 09.00 WIB
-                  </p>
-                </div>
+              <div>
+                <h3 class="font-bold text-orange-400">Latihan</h3>
+                <p class="text-gray-300 text-sm">Selasa &amp; Kamis<br />17.00 – 18.00 WITA</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="icon-box shrink-0" style="color:#67e8f9;background:rgba(103,232,249,.1);border-color:rgba(103,232,249,.3)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18c2 0 2-1.5 4-1.5S8 18 10 18s2-1.5 4-1.5 2 1.5 4 1.5 2-1.5 4-1.5"/><path d="M2 13c2 0 2-1.5 4-1.5S8 13 10 13s2-1.5 4-1.5 2 1.5 4 1.5 2-1.5 4-1.5"/><circle cx="16" cy="5" r="2"/></svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-cyan-300">Berenang</h3>
+                <p class="text-gray-300 text-sm">Minggu<br />08.00 – 09.00 WITA</p>
               </div>
             </div>
           </div>
@@ -552,134 +563,518 @@
       </div>
     </section>
 
-    <!-- Contact / CTA -->
-    <section id="contact" class="relative py-24 md:py-32 overflow-hidden">
-      <div
-        class="absolute inset-0 bg-gradient-to-br from-accent via-orange-600 to-orange-500"
-      ></div>
+    <!-- Pendaftaran -->
+    <section id="daftar" class="relative py-24 md:py-32 overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-accent via-orange-600 to-orange-500"></div>
       <div class="absolute inset-0 opacity-10">
-        <div
-          class="absolute top-20 left-20 w-72 h-72 bg-white rounded-full blur-3xl"
-        ></div>
-        <div
-          class="absolute bottom-20 right-20 w-96 h-96 bg-white rounded-full blur-3xl"
-        ></div>
+        <div class="absolute top-20 left-20 w-72 h-72 bg-white rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-20 w-96 h-96 bg-white rounded-full blur-3xl"></div>
       </div>
 
-      <div class="relative max-w-5xl mx-auto px-6 text-center">
-        <h3
-          class="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight"
-        >
-          Siap Tingkatkan Skill<br />Sepak Bola?
-        </h3>
-        <p class="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
-          Hubungi kami sekarang dan mulai latihan bersama Aphix Private.
-          Wujudkan mimpi menjadi pemain sepak bola profesional!
-        </p>
-        <a
-          href="https://wa.me/62895803499012?text=Assalamualaikum%20Coach,%0Asaya%20tertarik%20untuk%20bergabung%20dan%20ingin%20mendaftar%20latihan%20sepak%20bola%20di%20Aphix%20Private.
-"
-          target="_blank"
-          class="inline-flex items-center gap-3 bg-primary text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-[#0a1520] transition transform hover:scale-105 shadow-2xl"
-        >
-          <span>💬</span>
-          <span>Chat WhatsApp</span>
-        </a>
+      <div class="relative max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="inline-block text-xs font-bold tracking-[0.2em] uppercase bg-primary/20 rounded-full px-4 py-1.5">Pendaftaran Dibuka</span>
+          <h2 class="mt-5 text-4xl sm:text-5xl font-extrabold leading-tight">Siap Tingkatkan Skill Sepak Bola?</h2>
+          <p class="mt-6 text-lg text-white/90 max-w-md">
+            Isi nama, umur, dan asal SSB. Data akan langsung terkirim ke
+            WhatsApp coach Aphix.
+          </p>
+          <ol class="mt-8 space-y-3 text-white/90 text-sm">
+            <li class="flex items-center gap-3"><span class="w-7 h-7 rounded-full bg-primary text-accent font-bold flex items-center justify-center text-xs">1</span>Isi formulir singkat</li>
+            <li class="flex items-center gap-3"><span class="w-7 h-7 rounded-full bg-primary text-accent font-bold flex items-center justify-center text-xs">2</span>Kirim lewat WhatsApp</li>
+            <li class="flex items-center gap-3"><span class="w-7 h-7 rounded-full bg-primary text-accent font-bold flex items-center justify-center text-xs">3</span>Coach menghubungi untuk jadwal latihan</li>
+          </ol>
+          <p class="mt-8 text-white/80 text-sm">
+            Atau hubungi langsung:
+            <a href="https://wa.me/6281241081143" target="_blank" class="font-semibold underline">0812-4108-1143</a>
+          </p>
+        </div>
+
+        <form id="daftarForm" class="bg-primary/95 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-5">
+          <div>
+            <label for="nama" class="block text-sm font-medium mb-2">Nama Lengkap</label>
+            <input id="nama" name="nama" type="text" required class="field" placeholder="Nama pemain" />
+          </div>
+          <div>
+            <label for="umur" class="block text-sm font-medium mb-2">Umur</label>
+            <input id="umur" name="umur" type="number" min="3" max="40" required class="field" placeholder="Contoh: 12" />
+          </div>
+          <div>
+            <label for="ssb" class="block text-sm font-medium mb-2">Asal SSB</label>
+            <input id="ssb" name="ssb" type="text" required class="field" placeholder="Tulis '-' jika belum ada" />
+          </div>
+          <button type="submit" class="w-full flex items-center justify-center gap-3 bg-accent text-primary py-4 rounded-full font-bold text-lg hover:bg-orange-500 transition">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-.9 1.2-.3.2-.6.1a8.2 8.2 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1 2.5 5.9 5.9 0 0 0 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 1.9.8 2.6.9 3.6.7.6-.1 1.8-.7 2-1.4s.3-1.3.2-1.4-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+            Daftar via WhatsApp
+          </button>
+        </form>
       </div>
     </section>
 
     <!-- Footer -->
     <footer class="bg-[#0a1520] py-12 border-t border-white/5">
-      <div class="max-w-7xl mx-auto px-6">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="grid md:grid-cols-3 gap-8 mb-8">
           <div>
-            <h4 class="text-xl font-bold gradient-text mb-3">APHIX PRIVATE</h4>
-            <p class="text-gray-400 text-sm">
-              Program latihan sepak bola profesional untuk masa depan gemilang
-              Anda.
-            </p>
+            <div class="flex items-center gap-3 mb-3">
+              <span class="logo-badge w-10 h-10 shrink-0">
+                <img src="/images/aphixlogo-white.png" alt="Aphix Logo" />
+              </span>
+              <h4 class="text-xl font-bold gradient-text">APHIX PRIVATE</h4>
+            </div>
+            <p class="text-gray-400 text-sm">Program latihan sepak bola profesional untuk masa depan gemilang pemain muda.</p>
           </div>
           <div>
-            <h5 class="font-semibold text-white mb-3">Kontak</h5>
-            <p class="text-gray-400 text-sm">📱 WhatsApp: +62-8958-0349-9012</p>
-            <p class="text-gray-400 text-sm mt-2">
-              📍 Balikpapan, Kalimantan Timur
-            </p>
+            <h5 class="font-semibold mb-3">Kontak</h5>
+            <p class="text-gray-400 text-sm">WhatsApp: <a href="https://wa.me/6281241081143" target="_blank" class="hover:text-accent">0812-4108-1143</a></p>
+            <p class="text-gray-400 text-sm mt-2">Balikpapan, Kalimantan Timur</p>
           </div>
           <div>
-            <h5 class="font-semibold text-white mb-3">Jam Operasional</h5>
+            <h5 class="font-semibold mb-3">Jam Operasional</h5>
             <p class="text-gray-400 text-sm">Senin - Minggu: 08.00 - 22.00</p>
           </div>
         </div>
         <div class="border-t border-white/5 pt-8 text-center">
-          <p class="text-sm text-gray-400">
-            © 2025 Aphix Private. All rights reserved.
-          </p>
+          <p class="text-sm text-gray-400">&copy; 2025 Aphix Private. All rights reserved.</p>
         </div>
       </div>
     </footer>
 
-    <script>
-      const music = document.getElementById("bgMusic");
-      let played = false;
+    <!-- Lightbox foto -->
+    <div id="lightbox" class="hidden-lb fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4" role="dialog" aria-modal="true">
+      <button id="lbClose" class="absolute top-4 right-4 w-11 h-11 rounded-full glass flex items-center justify-center hover:bg-accent hover:text-primary transition" aria-label="Tutup">
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <button id="lbPrev" class="absolute left-2 sm:left-6 w-11 h-11 rounded-full glass flex items-center justify-center hover:bg-accent hover:text-primary transition" aria-label="Sebelumnya">
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+      </button>
+      <button id="lbNext" class="absolute right-2 sm:right-6 w-11 h-11 rounded-full glass flex items-center justify-center hover:bg-accent hover:text-primary transition" aria-label="Berikutnya">
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+      <figure class="max-w-4xl w-full">
+        <img id="lbImg" src="" alt="" class="w-full max-h-[75vh] object-contain rounded-2xl" />
+        <video id="lbVid" class="hidden w-full max-h-[75vh] rounded-2xl bg-black" controls playsinline></video>
+        <figcaption class="mt-4 text-center">
+          <p id="lbTitle" class="font-bold text-lg"></p>
+          <p id="lbCount" class="text-sm text-gray-400 mt-1"></p>
+        </figcaption>
+      </figure>
+    </div>
 
-      function playMusic() {
-        if (!played) {
-          music.volume = 1.0; // volume (0.0 – 1.0)
-          music.play().catch(() => {});
-          played = true;
-          window.removeEventListener("click", playMusic);
-          window.removeEventListener("scroll", playMusic);
+    <script>
+      /* =========================================================
+         DATA FOTO
+         Ganti path di "foto" dengan foto asli tiap momen/event.
+         Boleh lebih dari satu foto per item.
+         ========================================================= */
+      const ICONS = {
+        coach: '<path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M21 21v-2a4 4 0 0 0-3-3.85M16 3.13a4 4 0 0 1 0 7.75"/>',
+        shield: '<path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/>',
+        medal: '<circle cx="12" cy="8" r="6"/><path d="M8.2 13.1L7 22l5-3 5 3-1.2-8.9"/>',
+        plane: '<path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/>',
+        camera: '<path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><circle cx="12" cy="13" r="3.5"/>',
+        calendar: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 15l2 2 4-4"/>',
+        doc: '<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/>',
+        swim: '<path d="M2 18c2 0 2-1.5 4-1.5S8 18 10 18s2-1.5 4-1.5 2 1.5 4 1.5 2-1.5 4-1.5"/><path d="M2 13c2 0 2-1.5 4-1.5S8 13 10 13s2-1.5 4-1.5 2 1.5 4 1.5 2-1.5 4-1.5"/><circle cx="16" cy="5" r="2"/>',
+        person: '<circle cx="12" cy="7" r="4"/><path d="M5 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/>',
+        trophy: '<path d="M8 21h8M12 17v4"/><path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/>',
+        timer: '<line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="15" y1="14" y2="11"/><circle cx="12" cy="14" r="8"/>',
+      };
+
+      const PERJALANAN = [
+        {
+          tag: "Guest Coach",
+          title: "Guest Coach dari Beberapa Coach di Balikpapan",
+          desc: "Aphix mengundang beberapa coach di Balikpapan sebagai guest coach untuk melatih langsung, berbagi ilmu, dan pengalaman kepada para pemain.",
+          icon: "coach",
+          foto: ["/images/coach.jpg"],
+        },
+        {
+          tag: "Pemain Profesional",
+          title: "Bersama Ilham, Pemain Persiba Balikpapan",
+          desc: "Sesi spesial bersama Ilham, pemain Persiba Balikpapan, untuk memotivasi dan menginspirasi pemain muda Aphix.",
+          icon: "shield",
+          foto: ["/images/persiba.jpg"],
+        },
+        {
+          tag: "Prestasi Pemain",
+          title: "Kafi Ikut Piala Soeratin U-13",
+          desc: "Kafi, pemain binaan Aphix, terpilih mengikuti kompetisi Piala Soeratin U-13.",
+          icon: "medal",
+          foto: ["/images/kafi.jpg"],
+        },
+        {
+          tag: "Kolaborasi",
+          title: "Mengirim Pemain ke AAFI Bersama Be Great",
+          desc: "Aphix bekerja sama dengan Be Great mengirimkan pemain binaan ke AAFI untuk mendapatkan pengalaman dan kesempatan berkembang di level yang lebih tinggi.",
+          icon: "plane",
+          foto: ["/images/aafi.jpg"],
+        },
+        {
+          tag: "Dokumentasi",
+          title: "Photoshoot Tim",
+          desc: "Sesi photoshoot resmi pemain Aphix dengan seragam tim sebagai kenang-kenangan dan identitas tim.",
+          icon: "camera",
+          foto: ["/images/potoshoot.jpg"],
+        },
+        {
+          tag: "Rutin",
+          title: "Latihan Konsisten",
+          desc: "Latihan rutin setiap Selasa & Kamis ditambah sesi renang hari Minggu untuk menjaga progres pemain.",
+          icon: "calendar",
+          foto: ["/videos/latihan.mp4", "/videos/latihan1.mp4"],
+        },
+        {
+          tag: "Kualitas Pelatih",
+          title: "Coach Meraih Lisensi D",
+          desc: "Coach Aphix menempuh dan meraih Lisensi D kepelatihan agar metode latihan sesuai standar resmi.",
+          icon: "doc",
+          foto: ["/images/lisensi.jpg"],
+          // Atur tampilan foto di kartu: rasio lebih tinggi = lebih zoom out, posisi % lebih besar = lebih ke bawah
+          rasio: "4 / 3",
+          posisi: "center 65%",
+        },
+      ];
+
+      const EVENTS = [
+        {
+          title: "Guest Coach",
+          desc: "Sesi latihan bersama coach tamu untuk menambah wawasan, motivasi, dan kualitas latihan.",
+          icon: "person",
+          // Tiap coach = 1 kartu di carousel. Tambah: { src: "/images/xxx.jpg", nama: "Coach Xxx" },
+          foto: [
+            { src: "/images/zaenal.jpg", nama: "Coach Zainal" },
+            { src: "/images/syaid.jpg", nama: "Coach Syaid" },
+            { src: "/images/rendy.jpg", nama: "Coach Rendy" },
+            { src: "/images/ilham.jpg", nama: "Ilham (Persiba Balikpapan)" },
+            { src: "/images/yanuar.jpg", nama: "Coach Yanuar", posisi: "center 45%" },
+          ],
+        },
+        {
+          title: "Coming Up",
+          desc: "Event berikutnya segera diumumkan. Pantau terus!",
+          icon: "timer",
+          foto: [],
+        },
+      ];
+
+      // Foto bisa ditulis "path.jpg" atau { src, nama }
+      const fotoSrc = (f) => (typeof f === "string" ? f : f.src);
+      const isVideo = (src) => /\.(mp4|webm|mov)$/i.test(src);
+      // Thumbnail kartu: <video> untuk file video, <img> untuk foto
+      const media = (src, alt) =>
+        isVideo(src)
+          ? `<video src="${src}" muted autoplay loop playsinline preload="metadata" onloadedmetadata="this.closest('.thumb').style.aspectRatio = this.videoWidth + ' / ' + this.videoHeight / 2"></video>`
+          : `<img src="${src}" alt="${alt}" loading="lazy" onerror="this.onerror=null;this.src='/images/aphixfull.jpg'" />`;
+
+      const svg = (name) =>
+        `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICONS[name]}</svg>`;
+
+      const chip = (n, vid) =>
+        `<span class="view-chip glass inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-full">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><circle cx="12" cy="13" r="3.5"/></svg>
+          ${vid ? "Putar video" : "Lihat foto"}${n > 1 ? " (" + n + ")" : ""}
+        </span>`;
+
+      // Render timeline
+      const timeline = document.getElementById("timeline");
+      PERJALANAN.forEach((item, i) => {
+        const left = i % 2 === 0;
+        const card = `
+          <button type="button" class="photo-card glass rounded-3xl card-hover block" data-group="perjalanan" data-index="${i}">
+            <div class="thumb">
+              ${
+                item.foto.length > 1
+                  ? `<div class="thumb-track flex h-full transition-transform duration-700 ease-in-out">
+                      ${item.foto.map((f) => `<div class="shrink-0 w-full h-full">${media(fotoSrc(f), item.title)}</div>`).join("")}
+                    </div>
+                    <div class="thumb-dots absolute left-0 right-0 top-4 z-[2] flex justify-center gap-1.5">
+                      ${item.foto.map(() => `<span class="h-1.5 w-1.5 rounded-full bg-white/50 transition-all duration-300"></span>`).join("")}
+                    </div>`
+                  : media(fotoSrc(item.foto[0]), item.title)
+              }
+              <span class="absolute left-4 top-4 z-[2] bg-accent text-primary text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">${item.tag}</span>
+              ${chip(item.foto.length, isVideo(fotoSrc(item.foto[0])))}
+            </div>
+            <div class="p-6 flex gap-4">
+              <div class="icon-box shrink-0">${svg(item.icon)}</div>
+              <div>
+                <h3 class="font-bold text-lg leading-snug">${item.title}</h3>
+                <p class="text-gray-300 text-sm mt-2 leading-relaxed">${item.desc}</p>
+              </div>
+            </div>
+          </button>`;
+        timeline.insertAdjacentHTML(
+          "beforeend",
+          `<div class="relative md:grid md:grid-cols-2 md:gap-16 reveal ${i > 0 ? "md:-mt-52" : ""}">
+            <div class="tl-num absolute left-5 md:left-1/2 top-8 w-10 h-10 -translate-x-1/2 rounded-full border-2 border-accent text-accent font-bold text-sm flex items-center justify-center z-10">${String(i + 1).padStart(2, "0")}</div>
+            <div class="pl-14 md:pl-0 ${left ? "" : "md:col-start-2"}">${card}</div>
+          </div>`
+        );
+      });
+
+      // Pengaturan tampilan foto per kartu (rasio & posisi)
+      document.querySelectorAll("#timeline .photo-card").forEach((el) => {
+        const item = PERJALANAN[+el.dataset.index];
+        const thumb = el.querySelector(".thumb");
+        if (item.rasio) thumb.style.aspectRatio = item.rasio;
+        if (item.posisi) thumb.querySelectorAll("img").forEach((m) => (m.style.objectPosition = item.posisi));
+      });
+
+      // Carousel otomatis untuk kartu perjalanan yang punya lebih dari 1 foto/video
+      document.querySelectorAll(".thumb-track").forEach((track) => {
+        const card = track.closest(".photo-card");
+        const dots = card.querySelectorAll(".thumb-dots span");
+        const total = track.children.length;
+        let pos = 0;
+        const go = (n) => {
+          pos = n % total;
+          card.dataset.pos = pos;
+          track.style.transform = `translateX(-${pos * 100}%)`;
+          dots.forEach((d, i) => {
+            d.classList.toggle("w-5", i === pos);
+            d.classList.toggle("bg-accent", i === pos);
+            d.classList.toggle("w-1.5", i !== pos);
+            d.classList.toggle("bg-white/50", i !== pos);
+          });
+        };
+        go(0);
+        setInterval(() => go(pos + 1), 4000);
+      });
+
+      // Render event: 1 kartu = 1 foto, digabung jadi carousel
+      const eventGrid = document.getElementById("eventGrid");
+      EVENTS.forEach((ev, i) => {
+        if (!ev.foto.length) {
+          eventGrid.insertAdjacentHTML(
+            "beforeend",
+            `<div class="event-slide snap-start glass rounded-3xl p-6 flex flex-col items-center justify-center text-center min-h-[22rem]" style="border-style:dashed;border-color:rgba(249,115,22,.4)">
+              <div class="icon-box mb-5">${svg(ev.icon)}</div>
+              <p class="text-accent font-bold text-lg">${ev.title}</p>
+              <p class="text-gray-300 text-sm mt-2">${ev.desc}</p>
+            </div>`
+          );
+          return;
         }
+        ev.foto.forEach((f, p) => {
+          eventGrid.insertAdjacentHTML(
+            "beforeend",
+            `<button type="button" class="event-slide snap-start photo-card glass rounded-3xl card-hover" data-group="event" data-index="${i}" data-pos="${p}">
+              <div class="thumb">
+                <img src="${fotoSrc(f)}" alt="${f.nama || ev.title}" loading="lazy" ${f.posisi ? `style="object-position:${f.posisi}"` : ""} onerror="this.onerror=null;this.src='/images/aphixfull.jpg'" />
+                ${f.nama ? `<span class="absolute left-4 top-4 z-[2] bg-accent text-primary text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">${ev.title}</span>` : ""}
+                ${chip(1)}
+              </div>
+              <div class="p-6">
+                <div class="icon-box mb-4 -mt-12 relative z-[3] bg-primary">${svg(ev.icon)}</div>
+                <p class="text-accent font-bold text-lg">${f.nama || ev.title}</p>
+                <p class="text-gray-300 text-sm mt-2">${ev.desc}</p>
+              </div>
+            </button>`
+          );
+        });
+      });
+
+      // Carousel event: geser otomatis, tombol, titik, dan swipe
+      const slides = eventGrid.children;
+      const evDots = document.getElementById("evDots");
+      let evPos = 0;
+      let evTimer;
+      Array.from(slides).forEach((_, d) =>
+        evDots.insertAdjacentHTML(
+          "beforeend",
+          `<button type="button" aria-label="Slide ${d + 1}" class="h-1.5 rounded-full transition-all duration-300 bg-white/40 w-1.5"></button>`
+        )
+      );
+      const markDot = () =>
+        Array.from(evDots.children).forEach((d, n) => {
+          d.classList.toggle("w-6", n === evPos);
+          d.classList.toggle("bg-accent", n === evPos);
+          d.classList.toggle("w-1.5", n !== evPos);
+          d.classList.toggle("bg-white/40", n !== evPos);
+        });
+      const maxScroll = () => eventGrid.scrollWidth - eventGrid.clientWidth;
+      function evGo(n) {
+        evPos = (n + slides.length) % slides.length;
+        let left = slides[evPos].offsetLeft - eventGrid.offsetLeft;
+        if (left > maxScroll() + 2) {
+          // sudah mentok kanan -> balik ke awal
+          evPos = 0;
+          left = 0;
+        }
+        eventGrid.scrollTo({ left, behavior: "smooth" });
+        markDot();
+      }
+      const evStart = () => {
+        clearInterval(evTimer);
+        evTimer = setInterval(() => evGo(evPos + 1), 3500);
+      };
+      document.getElementById("evPrev").addEventListener("click", () => { evGo(evPos - 1); evStart(); });
+      document.getElementById("evNext").addEventListener("click", () => { evGo(evPos + 1); evStart(); });
+      Array.from(evDots.children).forEach((d, n) =>
+        d.addEventListener("click", () => { evGo(n); evStart(); })
+      );
+      // Sinkron titik saat digeser manual (swipe)
+      let scrollWait;
+      eventGrid.addEventListener("scroll", () => {
+        clearTimeout(scrollWait);
+        scrollWait = setTimeout(() => {
+          const x = eventGrid.scrollLeft;
+          let best = 0;
+          Array.from(slides).forEach((s, n) => {
+            const d = Math.abs(s.offsetLeft - eventGrid.offsetLeft - x);
+            if (d < Math.abs(slides[best].offsetLeft - eventGrid.offsetLeft - x)) best = n;
+          });
+          evPos = best;
+          markDot();
+        }, 120);
+      });
+      eventGrid.addEventListener("mouseenter", () => clearInterval(evTimer));
+      eventGrid.addEventListener("mouseleave", evStart);
+      eventGrid.addEventListener("touchstart", () => clearInterval(evTimer), { passive: true });
+      eventGrid.addEventListener("touchend", evStart);
+      markDot();
+      evStart();
+
+      // Lightbox
+      const lb = document.getElementById("lightbox");
+      const lbImg = document.getElementById("lbImg");
+      const lbTitle = document.getElementById("lbTitle");
+      const lbCount = document.getElementById("lbCount");
+      lbImg.onerror = () => { lbImg.src = "/images/aphixfull.jpg"; };
+      const lbPrev = document.getElementById("lbPrev");
+      const lbNext = document.getElementById("lbNext");
+      let lbItem = null;
+      let lbPos = 0;
+
+      const lbVid = document.getElementById("lbVid");
+      function showPhoto() {
+        const src = fotoSrc(lbItem.foto[lbPos]);
+        lbVid.pause();
+        if (isVideo(src)) {
+          lbImg.classList.add("hidden");
+          lbVid.classList.remove("hidden");
+          lbVid.src = src;
+          lbVid.play().catch(() => {});
+        } else {
+          lbVid.classList.add("hidden");
+          lbVid.removeAttribute("src");
+          lbImg.classList.remove("hidden");
+          lbImg.style.opacity = 0;
+          setTimeout(() => {
+            lbImg.src = src;
+            lbImg.alt = lbItem.title;
+            lbImg.style.opacity = 1;
+          }, 150);
+        }
+        const nama = lbItem.foto[lbPos].nama;
+        lbTitle.textContent = nama ? `${lbItem.title} - ${nama}` : lbItem.title;
+        const many = lbItem.foto.length > 1;
+        lbCount.textContent = many ? `${lbPos + 1} / ${lbItem.foto.length}` : "";
+        lbPrev.style.display = lbNext.style.display = many ? "" : "none";
+      }
+      function openLb(item, startAt = 0) {
+        lbItem = item;
+        lbPos = startAt;
+        showPhoto();
+        lb.classList.remove("hidden-lb");
+        document.body.style.overflow = "hidden";
+      }
+      function closeLb() {
+        lbVid.pause();
+        lb.classList.add("hidden-lb");
+        document.body.style.overflow = "";
+      }
+      function step(d) {
+        lbPos = (lbPos + d + lbItem.foto.length) % lbItem.foto.length;
+        showPhoto();
       }
 
+      document.querySelectorAll(".photo-card").forEach((el) => {
+        el.addEventListener("click", () => {
+          const list = el.dataset.group === "event" ? EVENTS : PERJALANAN;
+          openLb(list[+el.dataset.index], +(el.dataset.pos || 0));
+        });
+      });
+      document.getElementById("lbClose").addEventListener("click", closeLb);
+      lbPrev.addEventListener("click", (e) => { e.stopPropagation(); step(-1); });
+      lbNext.addEventListener("click", (e) => { e.stopPropagation(); step(1); });
+      lb.addEventListener("click", (e) => { if (e.target === lb) closeLb(); });
+      document.addEventListener("keydown", (e) => {
+        if (lb.classList.contains("hidden-lb")) return;
+        if (e.key === "Escape") closeLb();
+        if (e.key === "ArrowLeft") step(-1);
+        if (e.key === "ArrowRight") step(1);
+      });
+
+      // Navbar berubah saat scroll
+      const navbar = document.getElementById("navbar");
+      const onNav = () => {
+        const s = window.scrollY > 20;
+        navbar.classList.toggle("glass", s);
+        navbar.classList.toggle("py-3", s);
+        navbar.classList.toggle("py-4", !s);
+      };
+      window.addEventListener("scroll", onNav);
+      onNav();
+
+      // Musik latar
+      const music = document.getElementById("bgMusic");
+      let played = false;
+      function playMusic() {
+        if (played) return;
+        music.play().catch(() => {});
+        played = true;
+        window.removeEventListener("click", playMusic);
+        window.removeEventListener("scroll", playMusic);
+      }
       window.addEventListener("click", playMusic);
       window.addEventListener("scroll", playMusic);
 
+      // Galeri auto scroll
       const gallery = document.getElementById("autoGallery");
-
-      // Ambil semua anak gallery dan duplikasi untuk looping seamless
-      const galleryItems = Array.from(gallery.children);
-      galleryItems.forEach((item) => {
-        const clone = item.cloneNode(true);
-        gallery.appendChild(clone);
-      });
-
-      let speed = 0.5; // ubah ini untuk mengatur kecepatan scroll (lebih besar = lebih cepat)
+      Array.from(gallery.children).forEach((item) =>
+        gallery.appendChild(item.cloneNode(true))
+      );
+      const speed = 0.5;
       let scrollInterval;
-
-      // Fungsi auto scroll
       function autoScroll() {
         gallery.scrollLeft += speed;
-        // Reset scroll ketika sudah mencapai setengah scrollWidth
-        if (gallery.scrollLeft >= gallery.scrollWidth / 2) {
-          gallery.scrollLeft = 0;
-        }
+        if (gallery.scrollLeft >= gallery.scrollWidth / 2) gallery.scrollLeft = 0;
       }
-
-      // Start scroll
       scrollInterval = setInterval(autoScroll, 16);
-
-      // Optional: pause scroll ketika mouse hover
-      gallery.addEventListener("mouseenter", () =>
-        clearInterval(scrollInterval)
-      );
+      gallery.addEventListener("mouseenter", () => clearInterval(scrollInterval));
       gallery.addEventListener("mouseleave", () => {
         scrollInterval = setInterval(autoScroll, 16);
       });
 
+      // Reveal saat scroll
       const reveals = document.querySelectorAll(".reveal");
-
       const revealOnScroll = () => {
+        const trigger = window.innerHeight - 80;
         reveals.forEach((el) => {
-          const top = el.getBoundingClientRect().top;
-          const trigger = window.innerHeight - 100;
-          if (top < trigger) el.classList.add("active");
+          if (el.getBoundingClientRect().top < trigger) el.classList.add("active");
         });
       };
-
       window.addEventListener("scroll", revealOnScroll);
       revealOnScroll();
+
+      // Pendaftaran -> WhatsApp
+      document.getElementById("daftarForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const nama = document.getElementById("nama").value.trim();
+        const umur = document.getElementById("umur").value.trim();
+        const ssb = document.getElementById("ssb").value.trim();
+        const pesan =
+          "Assalamualaikum Coach, saya ingin mendaftar di Aphix Private.\n\n" +
+          "Nama: " + nama + "\n" +
+          "Umur: " + umur + " tahun\n" +
+          "Asal SSB: " + ssb;
+        window.open(
+          "https://wa.me/6281241081143?text=" + encodeURIComponent(pesan),
+          "_blank"
+        );
+      });
     </script>
   </body>
 </html>
