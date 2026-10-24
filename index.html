@@ -9,6 +9,16 @@
       content="Aphix Private - program latihan sepak bola personal di Balikpapan."
     />
 
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#0B1C2D" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Aphix" />
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -319,11 +329,21 @@
           <a href="#event" class="hover:text-accent transition">Event</a>
           <a href="#jadwal" class="hover:text-accent transition">Jadwal</a>
         </div>
-        <a
-          href="#daftar"
-          class="bg-accent text-primary px-5 py-2.5 rounded-full font-semibold text-sm hover:bg-orange-500 transition shadow-lg shadow-orange-500/30"
-          >Daftar</a
-        >
+        <div class="flex items-center gap-2">
+          <button
+            id="installBtn"
+            type="button"
+            class="hidden items-center gap-2 border border-white/20 px-4 py-2.5 rounded-full font-semibold text-sm hover:border-accent hover:text-accent transition"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+            <span class="hidden sm:inline">Install</span>
+          </button>
+          <a
+            href="#daftar"
+            class="bg-accent text-primary px-5 py-2.5 rounded-full font-semibold text-sm hover:bg-orange-500 transition shadow-lg shadow-orange-500/30"
+            >Daftar</a
+          >
+        </div>
       </div>
     </nav>
 
@@ -1028,6 +1048,30 @@
       onNav();
 
       // Musik latar
+      // PWA: daftarkan service worker & tombol Install
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/sw.js").catch(() => {});
+        });
+      }
+      const installBtn = document.getElementById("installBtn");
+      let installPrompt = null;
+      window.addEventListener("beforeinstallprompt", (e) => {
+        e.preventDefault();
+        installPrompt = e;
+        installBtn.classList.remove("hidden");
+        installBtn.classList.add("inline-flex");
+      });
+      installBtn.addEventListener("click", async () => {
+        if (!installPrompt) return;
+        installPrompt.prompt();
+        await installPrompt.userChoice;
+        installPrompt = null;
+        installBtn.classList.add("hidden");
+        installBtn.classList.remove("inline-flex");
+      });
+      window.addEventListener("appinstalled", () => installBtn.classList.add("hidden"));
+
       // Browser hanya mengizinkan audio setelah klik/sentuh/ketik, bukan scroll.
       const music = document.getElementById("bgMusic");
       const musicBtn = document.getElementById("musicBtn");
