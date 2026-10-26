@@ -1,11 +1,11 @@
 // Service worker Aphix Private.
 // Naikkan VERSION setiap kali isi website diubah supaya pengunjung dapat versi terbaru.
-const VERSION = "aphix-v1";
+const VERSION = "aphix-v7";
 const CORE = [
   "/",
   "/index.html",
   "/manifest.json",
-  "/images/aphixlogo-white.png",
+  "/images/aphixlogo-navy.png",
   "/images/aphixfull.jpg",
   "/icons/icon-192.png",
   "/icons/icon-512.png",
