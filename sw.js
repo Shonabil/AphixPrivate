@@ -1,6 +1,6 @@
 // Service worker Aphix Private.
 // Naikkan VERSION setiap kali isi website diubah supaya pengunjung dapat versi terbaru.
-const VERSION = "aphix-v7";
+const VERSION = "aphix-v9";
 const CORE = [
   "/",
   "/index.html",
@@ -30,16 +30,22 @@ self.addEventListener("fetch", (event) => {
   if (req.method !== "GET") return;
   const url = new URL(req.url);
 
-  // Video & audio terlalu besar untuk disimpan, langsung ambil dari jaringan
-  if (/\.(mp4|webm|mov|mp3)$/i.test(url.pathname) || req.headers.has("range")) return;
+  // Video terlalu besar untuk disimpan, langsung ambil dari jaringan
+  if (/\.(mp4|webm|mov)$/i.test(url.pathname) || req.headers.has("range")) return;
+
+  // File rapor dan halaman rapor jangan disimpan, supaya rapor terbaru selalu yang tampil
+  if (url.pathname.startsWith("/rapor")) return;
 
   // Halaman: coba jaringan dulu (biar selalu terbaru), kalau offline pakai cache
   if (req.mode === "navigate") {
     event.respondWith(
       fetch(req)
         .then((res) => {
-          const copy = res.clone();
-          caches.open(VERSION).then((c) => c.put("/index.html", copy));
+          // hanya beranda yang disimpan sebagai cadangan offline
+          if (res.ok && (url.pathname === "/" || url.pathname === "/index.html")) {
+            const copy = res.clone();
+            caches.open(VERSION).then((c) => c.put("/index.html", copy));
+          }
           return res;
         })
         .catch(() => caches.match("/index.html"))

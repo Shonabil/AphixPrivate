@@ -531,27 +531,6 @@
           opacity: 0;
         }
       }
-      #musicBtn .icon-on,
-      #musicBtn.is-playing .icon-off {
-        display: none;
-      }
-      #musicBtn.is-playing .icon-on {
-        display: block;
-      }
-      #musicBtn.is-playing {
-        color: var(--blue);
-        border-color: rgba(116, 180, 218, 0.5);
-        animation: musicPulse 2s ease-in-out infinite;
-      }
-      @keyframes musicPulse {
-        0%,
-        100% {
-          box-shadow: 0 0 0 0 rgba(116, 180, 218, 0.45);
-        }
-        50% {
-          box-shadow: 0 0 0 10px rgba(116, 180, 218, 0);
-        }
-      }
 
       /* ---------- Lightbox ---------- */
       #lightbox {
@@ -590,7 +569,6 @@
           scroll-behavior: auto;
         }
         .marquee-track,
-        #musicBtn.is-playing,
         .wa-float::before {
           animation: none;
         }
@@ -612,10 +590,6 @@
   </head>
   <body class="overflow-x-hidden">
     <div id="scrollProgress" aria-hidden="true"></div>
-
-    <audio id="bgMusic" loop preload="auto">
-      <source src="audio/VivaLaVida.mp3" type="audio/mpeg" />
-    </audio>
 
     <!-- ===================== NAVBAR ===================== -->
     <header id="navbar" class="fixed top-0 inset-x-0 z-50 transition-colors duration-300" style="padding-top: env(safe-area-inset-top)">
@@ -1083,6 +1057,7 @@
               <li><a href="#perjalanan" class="hover:text-accent transition">Perjalanan</a></li>
               <li><a href="#event" class="hover:text-accent transition">Event</a></li>
               <li><a href="#daftar" class="hover:text-accent transition">Daftar</a></li>
+              <li><a href="/rapor.html" class="hover:text-accent transition">Rapor Pemain</a></li>
             </ul>
           </div>
           <div class="md:col-span-3">
@@ -1123,17 +1098,6 @@
     >
       <svg class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1s-.5-.1-.7.1-.8 1-.9 1.2-.3.2-.6.1a8.2 8.2 0 0 1-4-3.5c-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.4 3.4 0 0 0-1 2.5 5.9 5.9 0 0 0 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 1.9.8 2.6.9 3.6.7.6-.1 1.8-.7 2-1.4s.3-1.3.2-1.4-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
     </a>
-    <button
-      id="musicBtn"
-      type="button"
-      aria-label="Musik on/off"
-      class="fixed left-5 z-[60] w-12 h-12 rounded-full glass text-cream flex items-center justify-center hover:scale-105 transition"
-      style="bottom: calc(1.25rem + env(safe-area-inset-bottom)); background: rgba(11, 28, 45, 0.75)"
-    >
-      <svg class="icon-on w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>
-      <svg class="icon-off w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4z"/><path d="M22 9l-6 6M16 9l6 6"/></svg>
-    </button>
-
     <!-- ===================== LIGHTBOX ===================== -->
     <div id="lightbox" class="hidden-lb fixed inset-0 z-[100] bg-primary/95 backdrop-blur-sm flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-label="Foto dan video">
       <button id="lbClose" type="button" class="absolute top-4 right-4 w-11 h-11 rounded-full glass text-cream flex items-center justify-center hover:bg-accent hover:text-primary transition" aria-label="Tutup">
@@ -1281,35 +1245,6 @@
 
       const tag = (text) =>
         `<span class="absolute left-4 top-4 z-[2] bg-cream text-primary text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow">${text}</span>`;
-
-      /* ---------- Musik latar ---------- */
-      // Browser hanya mengizinkan audio setelah klik/sentuh/ketik, bukan scroll.
-      const music = document.getElementById("bgMusic");
-      const musicBtn = document.getElementById("musicBtn");
-      music.volume = 0.6;
-      let userMuted = false;
-      const startEvents = ["pointerdown", "touchstart", "keydown"];
-      const syncBtn = () => musicBtn.classList.toggle("is-playing", !music.paused);
-      music.addEventListener("play", syncBtn);
-      music.addEventListener("pause", syncBtn);
-      function playMusic() {
-        if (userMuted) return;
-        music
-          .play()
-          .then(() => startEvents.forEach((ev) => window.removeEventListener(ev, playMusic)))
-          .catch(() => {});
-      }
-      startEvents.forEach((ev) => window.addEventListener(ev, playMusic));
-      musicBtn.addEventListener("pointerdown", (e) => e.stopPropagation());
-      musicBtn.addEventListener("click", () => {
-        if (music.paused) {
-          userMuted = false;
-          music.play().catch(() => {});
-        } else {
-          userMuted = true;
-          music.pause();
-        }
-      });
 
       /* ---------- Timeline Perjalanan ---------- */
       const timeline = document.getElementById("timeline");
@@ -1492,17 +1427,11 @@
       lbImg.onerror = () => (lbImg.src = "/images/aphixfull.jpg");
       let lbItem = null;
       let lbPos = 0;
-      let resumeMusic = false;
 
       function showPhoto() {
         const src = fotoSrc(lbItem.foto[lbPos]);
         lbVid.pause();
         if (isVideo(src)) {
-          // musik latar dijeda dulu supaya suara video terdengar
-          if (!music.paused) {
-            resumeMusic = true;
-            music.pause();
-          }
           lbImg.classList.add("hidden");
           lbVid.classList.remove("hidden");
           lbVid.src = src;
@@ -1535,8 +1464,6 @@
         lbVid.pause();
         lb.classList.add("hidden-lb");
         document.body.style.overflow = "";
-        if (resumeMusic && !userMuted) music.play().catch(() => {});
-        resumeMusic = false;
       }
       function step(d) {
         lbPos = (lbPos + d + lbItem.foto.length) % lbItem.foto.length;
