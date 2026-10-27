@@ -387,6 +387,24 @@
       .marquee-reverse {
         animation-direction: reverse;
       }
+      /* HP: layar sempit, jadi pita dibuat sejajar & berjarak supaya keduanya terlihat utuh */
+      @media (max-width: 639px) {
+        .band {
+          padding: 0.55rem 0;
+        }
+        .band-back {
+          top: 30%;
+          opacity: 1;
+          transform: translateY(-50%) rotate(-3deg);
+        }
+        .band-front {
+          top: 70%;
+          transform: translateY(-50%) rotate(-3deg);
+        }
+        .marquee-track {
+          animation-duration: 30s;
+        }
+      }
       @keyframes marquee {
         to {
           transform: translateX(-50%);
