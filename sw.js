@@ -1,6 +1,6 @@
 // Service worker Aphix Private.
 // Naikkan VERSION setiap kali isi website diubah supaya pengunjung dapat versi terbaru.
-const VERSION = "aphix-v10";
+const VERSION = "aphix-v11";
 const CORE = [
   "/",
   "/index.html",
